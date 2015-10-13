@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title     : TikZ Library for Structural Analysis
 % Version   : 1.10 (2013/03/03)
+% PATCH     : 1 (2015/10/13) by Stefano Miccoli
 %
 % Author    : Juergen HACKL
 % Engine    : PDFLaTeX
@@ -326,6 +327,24 @@
 			\draw[hatchingspring]($(#2)+1*(0,0)$) -- ++(-\supportHatchingLength/2,0);
 		\end{scope}
 	}{}
+	\ifthenelse{\equal{#1}{7}}{		%
+		\begin{scope}[rotate around={#3:(#2)}]
+			\draw [normalLine] (#2) -- ++(\supportLength/2,-\supportHeight) -- ++(-\supportLength,0) -- cycle;
+			% \draw [normalLine] ($(#2)+1*(\supportBasicLength/2,-\supportHeight)$) -- ++(-\supportBasicLength,0);
+			\draw [normalLine] ($(#2)+1*(\supportBasicLength/2,-\supportHeight-2*\supportGap)$) -- ++(-\supportBasicLength,0);
+                        % rollers
+                        \fill [white]      ($(#2)+1*(\supportLength/2-\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
+			\draw [normalLine] ($(#2)+1*(\supportLength/2-\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
+                        \fill [white]      ($(#2)+1*(0,-\supportHeight-\supportGap)$) circle (\supportGap);
+			\draw [normalLine] ($(#2)+1*(0,-\supportHeight-\supportGap)$) circle (\supportGap);
+                        \fill [white]      ($(#2)+1*(-\supportLength/2+\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
+			\draw [normalLine] ($(#2)+1*(-\supportLength/2+\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
+			\clip ($(#2)+1*(-\supportBasicLength/2,-\supportBasicHeight-\supportHeight-2*\supportGap)$) rectangle ($(#2)+1*(\supportBasicLength/2,-\supportHeight-2*\supportGap)$);
+			\draw[hatching]($(#2)+1*(\supportHatchingLength/2,-\supportHatchingHeight-2*\supportGap)$) -- ++(-\supportHatchingLength,0);
+
+		\end{scope}
+	}{}
+
 }
 
 %------------------------------------------------
