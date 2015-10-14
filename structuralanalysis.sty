@@ -5,7 +5,7 @@
 %
 % Author    : Juergen HACKL
 % Engine    : PDFLaTeX
-% University: Graz University of Technology 
+% University: Graz University of Technology
 %  						www.ifb.tugraz.at
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -209,7 +209,7 @@
 %		scaling
 %------------------------------------------------
 %			\scaling{scaling value}
-%	
+%
 
 \newcommandx{\scaling}[1]{
 	\renewcommand{\scalingParameter}{#1}
@@ -219,7 +219,7 @@
 %		point
 %------------------------------------------------
 %			\point{name}{x-coordiante}{y-coordiante}
-%			
+%
 
 \newcommandx{\point}[3]{
 	\node[coordinate][
@@ -250,11 +250,11 @@
 		\ifthenelse{\equal{#5}{0}}{}
 			{\fill (#3) circle (\bigLineWidth/2);}
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{3}}{		%
 		\draw [normalLine,dashed] (#2) -- (#3);
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{4}}{		%
 		\draw [hugeLine] (#2) -- (#3);
 		\ifthenelse{\equal{#4}{0}}{}
@@ -279,7 +279,7 @@
 			\draw[hatching]($(#2)+1*(\supportHatchingLength/2,-\supportHatchingHeight)$) -- ++(-\supportHatchingLength,0);
 		\end{scope}
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{2}}{		%
 		\begin{scope}[rotate around={#3:(#2)}]
 			\draw [normalLine] (#2) -- ++(\supportLength/2,-\supportHeight) -- ++(-\supportLength,0) -- cycle;
@@ -306,7 +306,7 @@
 			\draw[hatching]($(#2)+1*(\supportHatchingLength/2,-\supportGap)$) -- ++(-\supportHatchingLength,0);
 		\end{scope}
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{5}}{		%
 		\begin{scope}[rotate around={#3:(#2)}]
 			\draw [spring] (#2) -- ++(0,-\springLength);
@@ -359,9 +359,9 @@
 		\begin{scope}[rotate around={#3:(#2)}]
 			\fill [white] (#2) circle (\hingeRadius);
 			\draw [normalLine] (#2) circle (\hingeRadius);
-		\end{scope} 
+		\end{scope}
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{2}}{		%
 		\begin{scope}[even odd rule]
 			\ifthenelse{\equal{#5}{1}}{
@@ -374,24 +374,24 @@
 		\end{scope}
 		\draw[hugeLine] ($(#2)!\hingeRadius!(#3)$)--(#2)--($(#2)!\hingeRadius!(#4)$);
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{3}}{		%
 		\begin{scope}[rotate around={#3:(#2)}]
 			\fill [white] (#2) circle (\supportGap/1.5);
 			\draw [normalLine] ($(#2)+1*(\supportGap/2,\supportBasicLength/2)$) -- ++(0,-\supportBasicLength);
 			\draw [normalLine] ($(#2)+1*(-\supportGap/2,\supportBasicLength/2)$) -- ++(0,-\supportBasicLength);
-		\end{scope}	 
-	}{}	
-	
+		\end{scope}
+	}{}
+
 	\ifthenelse{\equal{#1}{4}}{		%
 		\begin{scope}[rotate around={#3:(#2)}]
 			\fill [white] ($(#2)+1*(-\hingeAxialLength/3,\hingeAxialHeight/2)$) rectangle ($(#2)+1*(0,-\hingeAxialHeight/2)$);
-			\draw [normalLine] ($(#2)+1*(2*\hingeAxialLength/3,\hingeAxialHeight/2)$) 
-						-- ++(-\hingeAxialLength,0) 
-						-- ++(0,-\hingeAxialHeight) 
+			\draw [normalLine] ($(#2)+1*(2*\hingeAxialLength/3,\hingeAxialHeight/2)$)
+						-- ++(-\hingeAxialLength,0)
+						-- ++(0,-\hingeAxialHeight)
 						-- ++(\hingeAxialLength,0);
-		\end{scope}	 
-	}{}	
+		\end{scope}
+	}{}
 
 	\ifthenelse{\equal{#1}{5}}{		%
 		\coordinate (hingeVarA) at ($ (#2)!\hingeCornerLength!(#3) $);
@@ -443,7 +443,7 @@
 			\draw[->,normalLine] ($(#2)+1*(\helpVarA,0)$) arc (0:\helpVarB:\helpVarA);
 		\end{scope}
 	}{}
-	
+
 }
 
 %------------------------------------------------
@@ -452,12 +452,12 @@
 %			\lineload{type}{initial point}{end point}[initial force value][end force value][force interval]
 %				[initial force value][end force value][force interval] are optional
 %
-%			and accordingly for type 3		
+%			and accordingly for type 3
 %
 %			\lineload{type}{initial point}{end point}[initial force value][end force value][lineload distance from inital point][force interval]
 %				[initial force value][end force value][lineload distance from inital point][force interval] are optional
 %
-%			and accordingly for type 4		
+%			and accordingly for type 4
 %
 %			\lineload{type}{initial point}{end point}[force interval][force length]
 %				[force interval][force length] are optional
@@ -486,7 +486,7 @@
 		\foreach \i in {\lineloadIntervalBegin,\lineloadIntervalStep,...,\lineloadIntervalEnd}
 		\draw [force,->] ($(lineloadVarA2)!\i!(lineloadVarB2)$)-- ($(lineloadVarA1)!\i!(lineloadVarB1)$);
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{2}}{		%
 		\coordinate (lineloadVarA1) at ($ (#2)+1*(0,\lineloadDistance) $);
 		\coordinate (lineloadVarB1) at ($ (#3)+1*(0,\lineloadDistance) $);
@@ -544,17 +544,17 @@
 		\foreach \i in {\lineloadIntervalBegin,\lineloadIntervalStep,...,\lineloadIntervalEnd}
 		\draw [force,->] ($(lineloadVarA2)!\i!(lineloadVarB2)$)-- ($(lineloadVarA1)!\i!(lineloadVarB1)$);
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{4}}{		%
 		\coordinate (lineloadVarA1) at ($ (#2)+1*(0,\lineloadDistance) $);
 		\coordinate (lineloadVarB1) at ($ (#3)+1*(0,\lineloadDistance) $);
 		\ifthenelse{\equal{#4}{1}}
 			{\pgfmathsetmacro{\lineloadIntervalStep}{\lineloadInterval}
-			\pgfmathsetmacro{\lineloadIntervalEnd}{1-\lineloadInterval/2}}	
+			\pgfmathsetmacro{\lineloadIntervalEnd}{1-\lineloadInterval/2}}
 			{\pgfmathsetmacro{\lineloadIntervalStep}{#4}
 			\pgfmathsetmacro{\lineloadIntervalEnd}{1-#4/2}}
 		\ifthenelse{\equal{#5}{1}}
-			{\pgfmathsetmacro{\lineloadForceLength}{\lineloadForce}}	
+			{\pgfmathsetmacro{\lineloadForceLength}{\lineloadForce}}
 			{\pgfmathsetmacro{\lineloadForceLength}{#5}}
 		\foreach \i in {0,\lineloadIntervalStep,...,\lineloadIntervalEnd}
 		\draw [force,->] ($(lineloadVarA1)!\i!(lineloadVarB1)$) -- ($(lineloadVarA1)!\i+\lineloadForceLength!(lineloadVarB1)$);
@@ -598,7 +598,7 @@
 											(dimensioningVarB)--++(\dimensioningBar/4,\dimensioningBar/4)--++(-\dimensioningBar/2,-\dimensioningBar/2)
 											(dimensioningVarA)--(dimensioningVarB) node [sloped,midway,above] {#5};
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{3}}{		%
 		\coordinate (dimensioningVarA) at ($ (#2)!{#4cm}!90:(#3) $);
 		\coordinate (dimensioningVarB) at ($ (#3)!{#4cm}!-90:(#2) $);
@@ -662,7 +662,7 @@
 		\fill [color=#6] (#1) circle (\bigLineWidth/2);
 		\fill [color=#6] (#2) circle (\bigLineWidth/2);
 	}
-	
+
 }
 
 %------------------------------------------------
@@ -678,9 +678,9 @@
 	\coordinate (temperatureVarB2) at ($ (temperatureVarA1)!-\temperatureHeight/2!90:(#2) $);
 	\coordinate (temperatureVarC1) at ($ (temperatureVarB2)!-#3!90:(temperatureVarB1) $);
 	\coordinate (temperatureVarC2) at ($ (temperatureVarB1)!#4!90:(temperatureVarB2) $);
-	
+
 	\filldraw[fill=\colorGray!20!white,smallLine] (temperatureVarB1) -- (temperatureVarC2) -- (temperatureVarC1) -- (temperatureVarB2) -- cycle;
-	
+
 	\draw (temperatureVarC1) node [#8]{#6};
 	\draw (temperatureVarC2) node [#9]{#7};
 }
@@ -700,7 +700,7 @@
 		\draw[smallLine] (addonVarB1)--(addonVarB2)
 		($(addonVarB1)+1*(\supportGap,0)$)--($(addonVarB2)+1*(\supportGap,0)$);
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{2}}{		% \addon{type}{insertion point}{initial point}{end point}[position-1/+1]
 		\coordinate (addonVarA1) at ($ (#2)!\dimensioningBar!(#3) $);
 		\coordinate (addonVarB1) at ($ (#2)!\dimensioningBar!(#4) $);
@@ -716,7 +716,7 @@
 		\draw[smallLine] (addonVarA1)--(addonVarC1)-- (addonVarB1);
 		\filldraw (addonVarD1) circle (\smallLineWidth);
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{3}}{		% \addon{type}{insertion point}{initial point}{end point}[position-1/+1]
 		\begin{scope}[even odd rule]
 			\ifthenelse{\equal{#5}{1}}{
@@ -729,7 +729,7 @@
 												(#2) circle (\dimensioningBar-\normalLineWidth-\normalLineWidth);
 		\end{scope}
 	}{}
-	
+
 }
 
 %------------------------------------------------
@@ -745,14 +745,14 @@
 			\draw (#2) node [#4]{#3};
 		\end{scope}
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{2}}{		% \notation{2}{insertion point}{labelling}[orientation];
 		\begin{scope}
 		\draw (#2) node [#4]{#3};
 		\draw[bigLine] (#2)--++(0,\dimensioningBar/2)--++(0,-\dimensioningBar);
 		\end{scope}
 	}{}
-	
+
 	\ifthenelse{\equal{#1}{3}}{		%
 		\coordinate (notationVarA1) at ($ (#2)!#5!(#3) $);
 		\coordinate (notationVarB1) at ($ (notationVarA1)!\dimensioningBar/2!90:(#3) $);
@@ -760,7 +760,7 @@
 		\draw[bigLine] (notationVarB1)--(notationVarB2);
 		\draw (notationVarA1) node [#6]{#4};
 	}{}
-		
+
 	\ifthenelse{\equal{#1}{4}}{		%
 		\ifthenelse{\equal{#7}{1}}
 			{\renewcommand{\helpVarB}{}}
@@ -768,8 +768,8 @@
 		\begin{scope}
 		\path (#2) -- (#3) node[inner sep=0mm,rectangle,smallLine,fill=white,draw,minimum size=2.5*\hingeRadius,midway,#6,\helpVarB,pos=#5] {#4};
 		\end{scope}
-	}{}	
-	
+	}{}
+
 	\ifthenelse{\equal{#1}{5}}{		%
 		\ifthenelse{\equal{#7}{1}}
 			{\renewcommand{\helpVarB}{}}
@@ -784,5 +784,5 @@
 		\draw (#2) node [inner sep=0mm,circle,smallLine,fill=white,draw,minimum size=2.5*\hingeRadius]{#3};
 		\end{scope}
 	}{}
-	
+
 }

@@ -21,7 +21,7 @@
 
 \begin{tikzpicture}
 	\scaling{.65};
-	
+
 	\point{a}{0}{1};
 	\point{b}{3}{1};
 	\point{c}{11}{3};
@@ -30,7 +30,7 @@
 	\point{f}{3}{0};
 	\point{g}{11}{-2};
 	\point{h}{19}{0};
-		
+
 	\beam{1}{a}{b}[0][1];
 	\beam{1}{b}{c}[1][1];
 	\beam{1}{c}{d}[1][1];
@@ -40,18 +40,18 @@
 	\beam{2}{f}{g};
 	\beam{2}{g}{h};
 	\beam{2}{g}{c};
-	
+
 	\support{1}{f};
-	\support{2}{h};
-	
+	\support{7}{h};
+
 	\hinge{1}{f};
 	\hinge{1}{h};
 	\hinge{1}{g};
 	\hinge{2}{c}[b][d];
-	
+
 	\lineload{2}{a}{b}[1][1][.5];
 	\lineload{2}{b}{c};
-	
+
 	\dimensioning{1}{a}{b}{-2.5}[$3,0$];
 	\dimensioning{1}{b}{c}{-2.5}[$8,0$];
 	\dimensioning{1}{c}{d}{-2.5}[$8,0$];
@@ -59,9 +59,9 @@
 	\dimensioning{2}{f}{a}{-1}[$1,0$];
 	\dimensioning{2}{g}{f}{-1}[$2,0$];
 	\dimensioning{2}{a}{c}{-1}[$2,0$];
-	
+
 	\influenceline{a}{e}{3}[.3];
-	
+
 	\notation{1}{a}{$1$}[left];
 	\notation{1}{b}{$2$}[below right=2mm];
 	\notation{1}{c}{$3$};
@@ -70,30 +70,30 @@
 	\notation{1}{f}{$6$}[left=2mm];
 	\notation{1}{g}{$7$}[below=2mm];
 	\notation{1}{h}{$8$}[right=2mm];
-		
+
 	\notation{4}{f}{g}[$S$];
-	
+
 \end{tikzpicture}
 
 \vspace{5cm}
 
-\setcoords{-25}{10}[1][1.2] 
-\setaxis{2} 
-%\showpoint 
-\begin{tikzpicture}[coords] 
+\setcoords{-25}{10}[1][1.2]
+\setaxis{2}
+%\showpoint
+\begin{tikzpicture}[coords]
 
-\dpoint{a}{0}{0}{0}; 
-\dpoint{b}{3}{0}{0}; 
-\dpoint{c}{6}{0}{0}; 
-\dpoint{d}{9}{0}{0}; 
-\dpoint{e}{12}{0}{0}; 
-\dpoint{f}{0}{3}{0}; 
-\dpoint{g}{3}{3}{0}; 
-\dpoint{h}{6}{3}{0}; 
-\dpoint{i}{9}{3}{0}; 
-\dpoint{j}{12}{3}{0}; 
+\dpoint{a}{0}{0}{0};
+\dpoint{b}{3}{0}{0};
+\dpoint{c}{6}{0}{0};
+\dpoint{d}{9}{0}{0};
+\dpoint{e}{12}{0}{0};
+\dpoint{f}{0}{3}{0};
+\dpoint{g}{3}{3}{0};
+\dpoint{h}{6}{3}{0};
+\dpoint{i}{9}{3}{0};
+\dpoint{j}{12}{3}{0};
 
-\daxis{1}{a}; 
+\daxis{1}{a};
 
 \dbeam{1}{f}{b};
 \dbeam{1}{b}{h};
