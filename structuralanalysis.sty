@@ -1,19 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title     : TikZ Library for Structural Analysis
 % Version   : 1.10 (2013/03/03)
-% PATCH     : 1 (2015/10/13) by Stefano Miccoli
+% PATCH     : 2 (2015/10/13) by Stefano Miccoli
 %
 % Author    : Juergen HACKL
 % Engine    : PDFLaTeX
 % University: Graz University of Technology
 %             www.ifb.tugraz.at
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%================================================
-%   use Package
-%================================================
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{structuralanalysis}
@@ -28,7 +22,6 @@
 \RequirePackage{xargs}
 \usetikzlibrary{shapes,arrows}
 \usetikzlibrary{positioning}
-\usepackage{verbatim}
 \usetikzlibrary{automata}
 \usetikzlibrary{arrows}
 \usetikzlibrary{calc}
@@ -298,12 +291,27 @@
     \end{scope}
   }{}
 
+  % pattino
   \ifthenelse{\equal{#1}{4}}{   %
     \begin{scope}[rotate around={#3:(#2)}]
-      \draw [normalLine] ($(#2)+1*(\supportBasicLength/2,0)$) -- ++(-\supportBasicLength,0);
-      \draw [normalLine] ($(#2)+1*(\supportBasicLength/2,-\supportGap)$) -- ++(-\supportBasicLength,0);
-      \clip ($(#2)+1*(-\supportBasicLength/2,-\supportBasicHeight-\supportGap)$) rectangle ($(#2)+1*(\supportBasicLength/2,-\supportGap)$);
-      \draw[hatching]($(#2)+1*(\supportHatchingLength/2,-\supportGap)$) -- ++(-\supportHatchingLength,0);
+      \draw [normalLine]
+        ($(#2)+(\supportLength/2,0)+(\supportGap,\supportGap)$)
+        -- ++(-\supportGap,-\supportGap)
+        -- ++(-\supportLength,0)
+        -- ++(-\supportGap, \supportGap)
+        ;
+      \draw [normalLine]
+        ($(#2)+(\supportBasicLength/2,-\supportGap)$)
+        -- ++(-\supportBasicLength,0)
+        ;
+      \clip
+        ($(#2)+(-\supportBasicLength/2,-\supportBasicHeight-\supportGap)$)
+        rectangle ($(#2)+1*(\supportBasicLength/2,-\supportGap)$)
+        ;
+      \draw [hatching]
+        ($(#2)+(\supportHatchingLength/2,-\supportGap)$)
+        -- ++(-\supportHatchingLength,0)
+        ;
     \end{scope}
   }{}
 
@@ -327,21 +335,74 @@
       \draw[hatchingspring]($(#2)+1*(0,0)$) -- ++(-\supportHatchingLength/2,0);
     \end{scope}
   }{}
+
+  % carrello
   \ifthenelse{\equal{#1}{7}}{   %
     \begin{scope}[rotate around={#3:(#2)}]
-      \draw [normalLine] (#2) -- ++(\supportLength/2,-\supportHeight) -- ++(-\supportLength,0) -- cycle;
-      % \draw [normalLine] ($(#2)+1*(\supportBasicLength/2,-\supportHeight)$) -- ++(-\supportBasicLength,0);
-      \draw [normalLine] ($(#2)+1*(\supportBasicLength/2,-\supportHeight-2*\supportGap)$) -- ++(-\supportBasicLength,0);
-                        % rollers
-                        \fill [white]      ($(#2)+1*(\supportLength/2-\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
-      \draw [normalLine] ($(#2)+1*(\supportLength/2-\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
-                        \fill [white]      ($(#2)+1*(0,-\supportHeight-\supportGap)$) circle (\supportGap);
-      \draw [normalLine] ($(#2)+1*(0,-\supportHeight-\supportGap)$) circle (\supportGap);
-                        \fill [white]      ($(#2)+1*(-\supportLength/2+\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
-      \draw [normalLine] ($(#2)+1*(-\supportLength/2+\supportGap,-\supportHeight-\supportGap)$) circle (\supportGap);
-      \clip ($(#2)+1*(-\supportBasicLength/2,-\supportBasicHeight-\supportHeight-2*\supportGap)$) rectangle ($(#2)+1*(\supportBasicLength/2,-\supportHeight-2*\supportGap)$);
-      \draw[hatching]($(#2)+1*(\supportHatchingLength/2,-\supportHatchingHeight-2*\supportGap)$) -- ++(-\supportHatchingLength,0);
+      \draw [normalLine]
+        (#2)
+        -- ++(\supportLength/2,-\supportHeight)
+        -- ++(-\supportLength,0)
+        -- cycle;
+      \draw [normalLine]
+        ($(#2)+(\supportBasicLength/2,-\supportHeight-2*\supportGap)$)
+        -- ++(-\supportBasicLength,0)
+        ;
+      % rollers
+      \draw [normalLine, fill=white]
+        ($(#2)+(\supportLength/2-\supportGap,-\supportHeight-\supportGap)$)
+        circle (\supportGap)
+        ;
+      \draw [normalLine, fill=white]
+        ($(#2)+(0,-\supportHeight-\supportGap)$)
+        circle (\supportGap)
+        ;
+      \draw [normalLine, fill=white]
+        ($(#2)+(-\supportLength/2+\supportGap,-\supportHeight-\supportGap)$)
+        circle (\supportGap)
+        ;
+      \clip
+        ($(#2)+(-\supportBasicLength/2,-\supportBasicHeight-\supportHeight-2*\supportGap)$)
+        rectangle
+        ($(#2)+(\supportBasicLength/2,-\supportHeight-2*\supportGap)$)
+        ;
+      \draw[hatching]
+        ($(#2)+(\supportHatchingLength/2,-\supportHatchingHeight-2*\supportGap)$)
+        -- ++(-\supportHatchingLength,0);
+    \end{scope}
+  }{}
 
+  % bi-pattino (FIXME, avoid repetition)
+  \ifthenelse{\equal{#1}{8}}{   %
+    \begin{scope}[rotate around={#3:(#2)}]
+      \fill [white]
+        ($(#2)+(-\hingeAxialHeight/2,0)$) rectangle
+        ($(#2)+( \hingeAxialHeight/2,\hingeAxialLength/3)$)
+        ;
+      \draw [normalLine]
+        ($(#2)+(-\hingeAxialHeight/2,\hingeAxialLength)$)
+	-- ++(0,-\hingeAxialLength)
+	-- ++( \hingeAxialHeight,0)
+	-- ++(0, \hingeAxialLength)
+        ;
+      \draw [normalLine]
+        ($(#2)+(\supportLength/2,0)+(\supportGap,\supportGap)$)
+        -- ++(-\supportGap,-\supportGap)
+        -- ++(-\supportLength,0)
+        -- ++(-\supportGap, \supportGap)
+        ;
+      \draw [normalLine]
+        ($(#2)+(\supportBasicLength/2,-\supportGap)$)
+        -- ++(-\supportBasicLength,0)
+        ;
+      \clip
+        ($(#2)+(-\supportBasicLength/2,-\supportBasicHeight-\supportGap)$)
+        rectangle ($(#2)+1*(\supportBasicLength/2,-\supportGap)$)
+        ;
+      \draw [hatching]
+        ($(#2)+(\supportHatchingLength/2,-\supportGap)$)
+        -- ++(-\supportHatchingLength,0)
+        ;
     \end{scope}
   }{}
 
